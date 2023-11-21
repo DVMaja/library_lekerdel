@@ -51,3 +51,4 @@ Route::middleware('auth.basic')->group(function () {
 Route::apiResource('/books', BookController::class);
 Route::patch('/user_password/{id}', [UserController::class, 'updatePassword']);
 Route::delete('/lendings/{user_id}/{copy_id}/{start}', [LendingController::class, 'destroy']);
+Route::get('/publicated/{book_id}', [BookController::class, 'publicated']);

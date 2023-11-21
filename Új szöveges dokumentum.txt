@@ -18,3 +18,7 @@ composer create-project laravel/laravel
 
 A show nál a Controllerekben
 A ___Controler helyett  this-> használunk
+
+Apiba való átszervezés
+A különbség:
+-csak a view -k valók a web-be
