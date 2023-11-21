@@ -14,10 +14,11 @@ class ReservationController extends Controller
 
     public function show ($user_id, $book_id, $start)
     {
-        return Reservation::where('user_id', $user_id)
+        $reservation = Reservation::where('user_id', $user_id)
         ->where('book_id', $book_id)
         ->where('start', $start)
-        ->first();
+        ->get();
+        return $reservation;
     }
 
 

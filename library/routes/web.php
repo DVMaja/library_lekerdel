@@ -4,6 +4,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\CopyController;
 use App\Http\Controllers\LendingController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,6 +42,11 @@ Route::middleware( ['admin'])->group(function () {
 Route::middleware('auth.basic')->group(function () {
     
     Route::apiResource('/api/copies', CopyController::class);
+    //Route::post('/api/lendings', LendingController::class)->except('put');
+    Route::post('/api/reservations', [ReservationController::class, 'store']);
+    Route::patch('/api/reservations/{user_id}/{book_id}/{start}', [ReservationController::class, 'update']);//->except('put');
+
+    Route::get('/api/reservations/{user_id}/{book_id}/{start}', [ReservationController::class, 'show']);
     
     //lekérdezések
     //with
@@ -48,6 +54,7 @@ Route::middleware('auth.basic')->group(function () {
     Route::get('/with/lending_user', [LendingController::class, 'lendingUser']);
     Route::get('/with/lending_user2', [LendingController::class, 'lendingUser2']);
     Route::get('/with/copy_book_lending', [CopyController::class, 'copyBookLending']);
+    Route::get('/with/user_l_r', [UserController::class, 'userLR']);
 });
 
 //bejelentkezés nélkül is hozzáférhet
