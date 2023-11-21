@@ -15,3 +15,6 @@ php artisan make:controller TaskController -m
 
 composer install
 composer create-project laravel/laravel
+
+A show nál a Controllerekben
+A ___Controler helyett  this-> használunk
