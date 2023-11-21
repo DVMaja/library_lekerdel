@@ -9,34 +9,36 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return User::all();
     }
 
-    public function show($id){
+    public function show($id)
+    {
         return User::find($id);
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         User::find($id)->delete();
-        
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->permission = $request->permission;
         $user->save();
-        
     }
 
     public function updatePassword(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            "password" => array( 'required', 'regex:/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[^\s]{8,}$/')
-      ]);
+            "password" => array('required', 'regex:/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[^\s]{8,}$/')
+        ]);
 
         if ($validator->fails()) {
             return response()->json(["message" => $validator->errors()->all()], 400);
@@ -49,12 +51,16 @@ class UserController extends Controller
     }
 
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->permission = $request->permission;
         $user->save();
+    }
+    public function userLR()
+    {
     }
 }

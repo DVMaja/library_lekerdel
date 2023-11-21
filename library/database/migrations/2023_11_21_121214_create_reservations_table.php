@@ -12,12 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('reservations', function (Blueprint $table) {
-            $table->primary('user_id', 'book_id', 'start');
-            $table->foreignId('user_id')->references('user_id')->on('users');
+            $table->primary(['user_id', 'book_id', 'start']);
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('book_id')->references('book_id')->on('books');
-            $table->boolean('merssage')->default(0);            
+            $table->date('start')->default(now());
+            $table->boolean('message')->default(0);
             $table->timestamps();
         });
+
     }
 
     /**

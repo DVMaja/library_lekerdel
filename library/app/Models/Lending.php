@@ -12,7 +12,10 @@ class Lending extends Model
     protected $fillable = [
         'user_id',
         'copy_id',
-        'start'
+        'start',
+        'end',
+        'extension',
+        'notice'
     ];
 
     protected function setKeysForSaveQuery($query)
