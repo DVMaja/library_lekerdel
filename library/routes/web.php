@@ -33,33 +33,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-//admin férhet hozzá
-Route::middleware( ['admin'])->group(function () {
-    Route::apiResource('/api/users', UserController::class);
-});
 
-//bejelentkezett felhasználó
-Route::middleware('auth.basic')->group(function () {
-    
-    Route::apiResource('/api/copies', CopyController::class);
-    //Route::post('/api/lendings', LendingController::class)->except('put');
-    Route::post('/api/reservations', [ReservationController::class, 'store']);
-    Route::patch('/api/reservations/{user_id}/{book_id}/{start}', [ReservationController::class, 'update']);//->except('put');
-
-    Route::get('/api/reservations/{user_id}/{book_id}/{start}', [ReservationController::class, 'show']);
-    
-    //lekérdezések
-    //with
-    Route::get('/with/book_copy', [BookController::class, 'bookCopy']);
-    Route::get('/with/lending_user', [LendingController::class, 'lendingUser']);
-    Route::get('/with/lending_user2', [LendingController::class, 'lendingUser2']);
-    Route::get('/with/copy_book_lending', [CopyController::class, 'copyBookLending']);
-    Route::get('/with/user_l_r', [UserController::class, 'userLR']);
-});
-
-//bejelentkezés nélkül is hozzáférhet
-Route::apiResource('/api/books', BookController::class);
-Route::patch('/api/user_password/{id}', [UserController::class, 'updatePassword']);
-Route::delete('/api/lendings/{user_id}/{copy_id}/{start}', [LendingController::class, 'destroy']);
 
 require __DIR__.'/auth.php';
